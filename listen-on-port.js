@@ -9,11 +9,11 @@ const utils = require('./lib/utils.js')
 
 // Set up configuration variables
 var useBrowserSync = config.useBrowserSync.toLowerCase()
-var env = (process.env.NODE_ENV || 'development').toLowerCase()
+var inProduction = utils.inProduction()
 
 utils.findAvailablePort(server, function (port) {
   console.log('Listening on port ' + port + '   url: http://localhost:' + port)
-  if (env === 'production' || useBrowserSync === 'false') {
+  if (inProduction || useBrowserSync === 'false') {
     server.listen(port)
   } else {
     server.listen(port - 50, function () {
